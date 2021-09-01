@@ -6,6 +6,8 @@
 package Entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.*;
 
 /**
@@ -24,9 +26,24 @@ public class Person implements Serializable {
     @OneToOne(cascade = CascadeType.PERSIST)
     private Address address;
 
+    @OneToMany(mappedBy = "person", cascade = CascadeType.PERSIST)
+    List<Fee> fees;
+
+    public List<Fee> getFees() {
+        return fees;
+    }
+
+    public void addFees(Fee fee) {
+        this.fees.add(fee);
+        if (fee != null){
+            fee.setPerson(this);
+        }
+    }
+
     public Address getAddress() {
         return address;
     }
+
 
     public void setAddress(Address address) {
         this.address = address;
@@ -42,6 +59,7 @@ public class Person implements Serializable {
     public Person(String name, int year) {
         this.name = name;
         this.year = year;
+        this.fees = new ArrayList<>();
     }
 
    
