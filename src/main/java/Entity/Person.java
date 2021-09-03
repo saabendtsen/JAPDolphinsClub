@@ -5,10 +5,10 @@
  */
 package Entity;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.*;
 
 /**
  *
@@ -29,14 +29,32 @@ public class Person implements Serializable {
     @OneToMany(mappedBy = "person", cascade = CascadeType.PERSIST)
     List<Fee> fees;
 
+    @ManyToMany(mappedBy = "persons", cascade = CascadeType.PERSIST)
+    List<SwimStyle> styles;
+
     public List<Fee> getFees() {
         return fees;
     }
 
-    public void addFees(Fee fee) {
+    public void addFee(Fee fee) {
         this.fees.add(fee);
-        if (fee != null){
+        if (fee != null) {
             fee.setPerson(this);
+        }
+    }
+
+    public void addSwimStyle(SwimStyle style) {
+        if (style != null) {
+            this.styles.add(style);
+            style.getPersons().add(this);
+        }
+    }
+
+    public void removeSwimStyle(SwimStyle swimStyle){
+        if (swimStyle != null){
+            styles.remove(swimStyle);
+            swimStyle.getPersons().remove(this);
+
         }
     }
 
@@ -47,7 +65,7 @@ public class Person implements Serializable {
 
     public void setAddress(Address address) {
         this.address = address;
-        if (address != null){
+        if (address != null) {
             address.setPerson(this);
         }
     }
@@ -60,6 +78,7 @@ public class Person implements Serializable {
         this.name = name;
         this.year = year;
         this.fees = new ArrayList<>();
+        this.styles = new ArrayList<>();
     }
 
    
