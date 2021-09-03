@@ -32,6 +32,17 @@ public class Person implements Serializable {
     @ManyToMany(mappedBy = "persons", cascade = CascadeType.PERSIST)
     List<SwimStyle> styles;
 
+    @OneToMany
+    List<Link_person_team> link_person_teams;
+
+    public List<Link_person_team> getLink_person_teams() {
+        return link_person_teams;
+    }
+
+    public void setLink_person_teams(List<Link_person_team> link_person_teams) {
+        this.link_person_teams = link_person_teams;
+    }
+
     public List<Fee> getFees() {
         return fees;
     }

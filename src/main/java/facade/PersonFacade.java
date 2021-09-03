@@ -123,6 +123,19 @@ public class PersonFacade {
         return res;
     }
 
+    public Integer findLowestFee(){
+        EntityManager em = emf.createEntityManager();
+        Query query = em.createQuery("SELECT MIN(f.amount) FROM Fee f");
+        Integer res = (Integer) query.getSingleResult();
+        return res;
+    }
+    public Integer findHighestFee(){
+        EntityManager em = emf.createEntityManager();
+        Query query = em.createQuery("SELECT MAX(f.amount) FROM Fee f");
+        Integer res = (Integer) query.getSingleResult();
+        return res;
+    }
+
 
 
 

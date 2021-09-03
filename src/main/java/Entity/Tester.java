@@ -48,6 +48,8 @@ public class Tester {
             }
         }
         System.out.println("total fees: " + res);
+        System.out.println("Lowest fee: " + pf.findLowestFee());
+        System.out.println("Highest fee: " + pf.findHighestFee());
 
 
 /*
@@ -85,6 +87,9 @@ public class Tester {
         Person p13 = new Person("Gitte", 1975);
         Person p14 = new Person("Hans", 1989);
 
+
+        Team t1 = new Team("Low");
+
         Address a1 = new Address("Storegade 10", 2323, "Nr. Søby");
         Address a2 = new Address("Bredgade 14", 1212, "København K");
         Address a3 = new Address("Lillegade 1", 2323, "Nr. Søby");
@@ -116,7 +121,7 @@ public class Tester {
         Fee f4 = new Fee(100);
         Fee f5 = new Fee(100);
         Fee f6 = new Fee(100);
-        Fee f7 = new Fee(100);
+        Fee f7 = new Fee(10);
 
 
         p3.addFee(f1);
